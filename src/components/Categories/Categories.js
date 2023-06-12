@@ -19,7 +19,7 @@ const Categories = () => {
         <h3>Candles</h3>
 
       </div>
-      <div className="category-card">
+      <div className="category-card" onClick={handleclick}>
         <img src={Fragrance} alt="Fragrance" />
         <h3>Fragrance</h3>
       </div>

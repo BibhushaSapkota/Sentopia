@@ -49,8 +49,8 @@ const Navbar = () => {
       <div className="dropdown">
         <button className="dropbtn">Categories</button>
         <div className="dropdown-content">
-          <a href="/categories/candle">Candle</a>
-          <a href="/categories/fragrance">Fragrance</a>
+          <a href="/products">Candle</a>
+          <a href="/products">Fragrance</a>
         </div>
       </div>
 

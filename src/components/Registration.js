@@ -11,7 +11,7 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState('')
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [message, setMessage] = useState('')
+  const [messages, setMessage] = useState('')
   const Navigate=useNavigate()
 
   useEffect(() => {
@@ -39,9 +39,10 @@ function Registration() {
     
     setMessage('')
 
-}, [confirmPassword, password])
+}, [confirmPassword])
 
  
+
 async function handleSubmit(e) {
   e.preventDefault();
   try {
@@ -59,7 +60,7 @@ async function handleSubmit(e) {
       throw new Error('Error occurred while registering')
     }
   } catch (error) {
-    alert(error.message)
+    message.error('Failed to register an user. Please try again later')
   }
 }
 
@@ -111,11 +112,11 @@ async function handleSubmit(e) {
                 value={confirmPassword}
                 onChange={(e)=>setConfirmPassword(e.target.value)}/>
             </div>
-            <div className='input-group'>
-                            <div style={{position:"absolute",marginLeft:"5rem" }}>
-                                <FormFeedback style={{color:"red",fontSize:"0.8rem"}}>{message}</FormFeedback>
-                            </div>
-                            </div>
+            <div className='form-group'>
+       
+                  <FormFeedback style={{color:"red",fontSize:"0.8rem"}}>{messages}</FormFeedback>
+                
+            </div>
 
             <button type="submit"
             onClick={handleSubmit}>Create Account</button>

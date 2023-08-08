@@ -82,3 +82,33 @@ button[type="submit"]:hover {
 #link-register:hover {
     color: #fe72bd;
   }
+
+.verify-container {
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+  justify-content: center;
+
+
+  /* Adjust this to your desired height */
+}
+
+.verify-container form {
+  margin-top: 10vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 40vh;
+    height: 30vh;
+}
+
+.verify-container label,
+.verify-container input,
+.verify-container button {
+  margin-bottom: 5vh;
+}

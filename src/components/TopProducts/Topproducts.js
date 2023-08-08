@@ -8,19 +8,19 @@ const TopProducts = () => {
   const products = [
     {
       name: 'Product 1',
-      price: 9.99,
+      price: 999,
       category: 'Candles',
       image: ProductImage1,
     },
     {
       name: 'Product 2',
-      price: 14.99,
+      price: 1499,
       category: 'Fragrance',
       image: ProductImage2,
     },
     {
       name: 'Product 3',
-      price: 12.99,
+      price: 1299,
       category: 'Candles',
       image: ProductImage3,
     },
@@ -34,7 +34,7 @@ const TopProducts = () => {
           <div className="product-card" key={index}>
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
-            <p>Price: ${product.price.toFixed(2)}</p>
+            <p>Price: Rs.{product.price}</p>
             <p>Category: {product.category}</p>
           </div>
         ))}

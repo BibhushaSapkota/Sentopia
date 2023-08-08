@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { HashLink as Link} from 'react-router-hash-link';
+import Cart from '../Cart/Cart';
 
 import './Navbar.css';
 
 
 const Navbar = () => {
+  const [showCart, setshowCart] = useState(false);
   const handleLogout = () => {
     // Remove the token from local storage
     localStorage.removeItem('token');
@@ -18,7 +20,7 @@ const Navbar = () => {
 
   if (isLoggedIn) {
     cartButton = (
-      <button >
+      <button onClick={() => setshowCart(true)}>
         Cart
       </button>
     );
@@ -36,6 +38,7 @@ const Navbar = () => {
     }
 
   return (
+    <>
     <nav className="navbar">
       <div className="logo">
         <a href="/">Sentopia   </a>
@@ -59,6 +62,8 @@ const Navbar = () => {
         {loginOrLogoutButton}
       </div>
     </nav>
+    {showCart && <Cart setshowCart={setshowCart} />}
+    </>
   );
 };
 

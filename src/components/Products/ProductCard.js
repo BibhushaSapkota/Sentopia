@@ -14,7 +14,7 @@ const ProductCard=({product})=>{
         <div className="product-card" onClick={handleClick}>
             <img src={"http://localhost:3000" + product.image} alt="product" />
             <h3>{product.name}</h3>
-            <p>Price: ${product.price}</p>
+            <p>Price: Rs.{product.price}</p>
             <p>Category: {product.category.categoryName}</p>
         </div>
 

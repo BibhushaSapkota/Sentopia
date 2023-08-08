@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
 import './ProductDetailPage.css';
+import { message } from 'antd';
+import CartService from '../../services/cartService';
 
 const ProductDetailPage = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
+  const [cartItems, setCartItems] = useState([]);
 
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+  const handleAddToCart =(product,quantity,amount)=> {
+        CartService.addtocart({product, quantity, amount})
+            .then((response) => {
+                setCartItems(response.data);
+                console.log(response.data);
+                if(response.status === 201){
+                    message.success('Product added to cart successfully');
+                    
+                }       
+            }
+            )       
+          };
+    
+   
 
-  const handleIncrease = () => {
-    setQuantity(quantity + 1);
-  };
+    const decrement = () => {
+        setQuantity((prevState) => {
+            if (prevState === 1) return 1;
+            return prevState - 1;
+        });
+    };
+    const increment = () => {
+        setQuantity((prevState) => prevState + 1);
+    };
 
-  const handleAddToCart = () => {
-    // Add your logic here to add the product to the cart
-    console.log(`Added ${quantity} product(s) to the cart.`);
-  };
+  
 
   return (
     <div className="container">
@@ -31,7 +46,7 @@ const ProductDetailPage = ({ product }) => {
           <p className="product-description">{product.description}</p>
           <p className="product-category">Category: {product.category.categoryName}</p>
           <div className="quantity-container">
-            <button className="quantity-button" onClick={handleDecrease}>
+            <button className="quantity-button" onClick={decrement}>
               -
             </button>
             <input
@@ -40,11 +55,11 @@ const ProductDetailPage = ({ product }) => {
               value={quantity}
               readOnly
             />
-            <button className="quantity-button" onClick={handleIncrease}>
+            <button className="quantity-button" onClick={increment}>
               +
             </button>
           </div>
-          <button className="add-to-cart-button" onClick={handleAddToCart}>
+          <button className="add-to-cart-button" onClick={()=>handleAddToCart(product, quantity, product.price * quantity)}>
             Add to Cart
           </button>
         </div>

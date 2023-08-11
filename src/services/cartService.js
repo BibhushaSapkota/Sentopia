@@ -15,18 +15,6 @@ const  getCartItems= () => {
     return axios.get(`${baseUrl}/user/${window.localStorage.getItem('id')}`, config);
 }
 
-const deleteCartItems= (id) => {
-    const config = {
-        headers: { Authorization: `Bearer ${window.localStorage.getItem('token')}` }
-    };
-    return axios.delete(`${baseUrl}/${id}`, config);
-}
-
-const clearcart = () => {
-    const config = {
-        headers: { Authorization: `Bearer ${window.localStorage.getItem('token')}` }
-    };
-    return axios.delete(`${baseUrl}/user/${window.localStorage.getItem('id')}`, config);
-}
+ 
 
 export default {addtocart,getCartItems, deleteCartItems, clearcart}

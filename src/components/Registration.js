@@ -47,10 +47,23 @@ async function handleSubmit(e) {
   e.preventDefault();
   try {
     if (!name || !email || !password || !confirmPassword) {
-      throw new Error('All fields are required')
+      message.error('All fields are required')
     }
-    
-   
+    else if (password !== confirmPassword) {
+      message.error('Password and confirm password does not match')
+    }
+    else if (password.length < 8) {
+      message.error('Password must be atleast 8 characters long')
+    }
+    else if (
+      password===email,
+      password===name,
+      password==='12345678',
+      password==='password'
+    ) {
+      message.error('Password must not be same as email or name or 12345678 or password')
+    }
+
     const response = await userService.register({ name, email, password })
 
     if (response.data.status) {

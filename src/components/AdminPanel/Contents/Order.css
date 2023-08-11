@@ -1,0 +1,31 @@
+.order-table {
+    width: 98%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    margin-top: 5rem;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 99%;
+  }
+  
+  th,
+  td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f9660bee;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+

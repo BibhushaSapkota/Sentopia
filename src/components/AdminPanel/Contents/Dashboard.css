@@ -1,0 +1,91 @@
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  margin-top: 6rem;
+}
+
+.card {
+  flex-basis: 30%;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-basis: 45%;
+  }
+}
+
+.add-product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.add-product h3 {
+  flex-basis: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.left {
+  flex-basis: 40%;
+  margin-right: 20px;
+}
+
+.left img {
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.right {
+  flex-basis: 50%;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label {
+  flex-basis: 100%;
+  margin-bottom: 5px;
+}
+
+.add-product .right input[type="text"],
+textarea,
+select {
+  flex-basis: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+button[type="submit"] {
+  flex-basis: 100%;
+  padding: 10px;
+  background-color: #f6b29b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #8e5f3e;
+}

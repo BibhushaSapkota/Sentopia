@@ -1,0 +1,27 @@
+.user-table-container {
+  overflow-x: auto;
+}
+
+.user-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.user-table th,
+.user-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.user-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.user-table tr:hover {
+  background-color: #ddd;
+}
+
+.user-table th {
+  background-color: #f9660bee;
+  color: white;
+}

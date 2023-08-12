@@ -6,6 +6,9 @@ import RegisterPage from './components/Registration';
 import Products from './components/Products/ProductPage';
 import ProductDetailtPage from './components/ProductDetails/ProductDetailPage';
 import {Routes,Route,useMatch } from 'react-router-dom';
+import Homeadmin from './components/AdminPanel/Home';	
+import EditProduct from './components/AdminPanel/Contents/EditProduct';
+
 
 
 
@@ -27,6 +30,8 @@ function App() {
     <Route path="products" element={<Products products={products} setProducts={setProducts} />} exact/>
     <Route path="/products/:id" element={<ProductDetailtPage product={product}/>} exact/> 
     <Route path="*" element={<h1>404 Not Found</h1>}/>
+    <Route path="/admin" element={<Homeadmin/>}/> 
+    <Route path="/editProduct" element={<EditProduct/>} exact/>
 
     </Routes>
    </div>

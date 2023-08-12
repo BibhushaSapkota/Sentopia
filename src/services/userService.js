@@ -11,4 +11,25 @@ const register = (userDetails) => {
 }
 
 
-export default { login, register };
+const getUser = () => {
+
+    const config = {
+        headers: { Authorization: `Bearer ${window.localStorage.getItem('token')}` }
+    };
+    return axios.get(`${baseUrl}/`, config);
+}
+
+const getUserById = () => {
+    const config = {
+        headers: { Authorization: `Bearer ${window.localStorage.getItem('token')}` }
+    };
+    return axios.get(`${baseUrl}/profile`,config);
+}
+const updatePassword = (password) => {
+    const config = {
+        headers: { Authorization: `Bearer ${window.localStorage.getItem('token')}` }
+    };
+    return axios.put(`${baseUrl}/${window.localStorage.getItem('id')}`, {password}, config);
+}
+
+export default { login, register, getUser ,getUserById, updatePassword};

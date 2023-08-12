@@ -1,15 +1,9 @@
 :root {
     --header-height: 3rem;
     --nav-width: 58px;
-    --first-color: #fd5b10;
-    --first-color-alt: #f5aa82;
+    --first-color: #FF0088;
+    --first-color-alt: #fe72bd;
     --white-color: #f5f1f3;
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
   }
   
   a {
@@ -20,7 +14,7 @@
     list-style: none;
   }
   
-  main {
+  .main {
     position: relative;
     margin-top: var(--header-height);
     padding: 0 1rem;

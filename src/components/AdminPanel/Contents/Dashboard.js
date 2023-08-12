@@ -4,7 +4,7 @@ import OrderService from '../../../services/orderService';
 import productService from "../../../services/productService";
 import userService from "../../../services/userService";
 import categoryService from '../../../services/categoryService';
-import defaultproduct from '../../../images/car1.jpg';
+import defaultproduct from './Fragrance.jpg';
 import {message} from 'antd';
 
 

@@ -14,66 +14,106 @@ function Registration() {
   const [messages, setMessage] = useState('')
   const Navigate=useNavigate()
 
-  useEffect(() => {
-    if (password !== confirmPassword) {
-        setMessage('password and confirm password does not match')
-        return
-    }
-    else if( password.length>0 && password.length < 8){
-      setMessage('Password must be atleast 8 characters long')
-      return
-    }
-    else if (password.length>0 && password.search(/[a-z]/i) < 0) {
-      setMessage('Password must contain atleast one letter')
-      return
-    }
-    else if (password.length>0 && password.search(/[0-9]/) < 0) {
-      setMessage('Password must contain atleast one digit')
-      return
-    }
-    else if (password.length>0 && password.search(/[!@#$%^&*]/) < 0) {
-      setMessage('Password must contain atleast one special character')
-      return
-    }
-    
-    
-    setMessage('')
 
-}, [confirmPassword])
+const validateEmail = (value) => {
+    if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(value)) {
+      setMessage('Please enter a valid email');
+    } else {
+      setMessage('');
+    }
+    setEmail(value);
+  };
 
- 
+  const validatePassword = (value) => {
+    if (
+      value === email ||
+      value === name ||
+      value === '12345678' ||
+      value === 'password'
+    ) {
+      setMessage('Password must not be the same as email, name, 12345678, or password');
+    } else if (value.search(/[a-zA-Z]/) < 0) {
+      setMessage('Password must contain at least one letter');
+    } else if (value.search(/[0-9]/) < 0) {
+      setMessage('Password must contain at least one digit');
+    } else if (value.search(/[!@#$%^&*]/) < 0) {
+      setMessage('Password must contain at least one special character');
+    } else {
+      setMessage('');
+    }
+    setPassword(value);
+  };
+
+  const validateConfirmPassword = (value) => {
+    if (value !== password) {
+      setMessage('Password and confirm password do not match');
+    } else {
+      setMessage('');
+    }
+    setConfirmPassword(value);
+  };
+
+
+function escapeSpecialCharacters(input) {
+  return input.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
 async function handleSubmit(e) {
   e.preventDefault();
   try {
     if (!name || !email || !password || !confirmPassword) {
-      message.error('All fields are required')
+      setMessage('All fields are required');
+      return;
     }
-    else if (password !== confirmPassword) {
-      message.error('Password and confirm password does not match')
+    if (password !== confirmPassword) {
+      setMessage('Password and confirm password do not match');
+      return;
     }
-    else if (password.length < 8) {
-      message.error('Password must be atleast 8 characters long')
+    if (password.length < 8) {
+      setMessage('Password must be at least 8 characters long');
+      return;
     }
-    else if (
-      password===email,
-      password===name,
-      password==='12345678',
-      password==='password'
+    if (
+      password === email ||
+      password === name ||
+      password === '12345678' ||
+      password === 'password'
     ) {
-      message.error('Password must not be same as email or name or 12345678 or password')
+      setMessage('Password must not be the same as email, name, 12345678, or password');
+      return;
+    }
+    if (!/[a-zA-Z]/.test(password)) {
+      setMessage('Password must contain at least one letter');
+      return;
+    }
+    if (!/\d/.test(password)) {
+      setMessage('Password must contain at least one digit');
+      return;
+    }
+    if (!/[!@#$%^&*]/.test(password)) {
+      setMessage('Password must contain at least one special character');
+      return;
+    }
+    if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email)) {
+      setMessage('Please enter a valid email');
+      return;
     }
 
-    const response = await userService.register({ name, email, password })
+    // Sanitize user inputs
+    const sanitizedEmail = escapeSpecialCharacters(email);
+    const sanitizedName = escapeSpecialCharacters(name);
+    const sanitizedPassword = escapeSpecialCharacters(password);
+
+    const response = await userService.register({ name: sanitizedName, email: sanitizedEmail, password: sanitizedPassword });
 
     if (response.data.status) {
-      message.success("User registered Successful")
-      Navigate('/login')
+      message.success('User registered successfully');
+      Navigate('/login');
     } else {
-      throw new Error('Error occurred while registering')
+      throw new Error('Error occurred while registering');
     }
   } catch (error) {
-    message.error('Failed to register an user. Please try again later')
+    message.error('Failed to register a user. Please try again later');
   }
 }
 
@@ -102,7 +142,7 @@ async function handleSubmit(e) {
                       name="email" required  
                       placeholder="Enter your Email" 
                       value={email}
-                      onChange={(e)=>setEmail(e.target.value)}/>
+                      onChange={(e)=>validateEmail(e.target.value)}/>
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -111,7 +151,7 @@ async function handleSubmit(e) {
                       name="password" required 
                       placeholder="Enter your Password"
                       value={password}
-                      onChange={(e)=>setPassword(e.target.value)}/>
+                      onChange={(e)=>validatePassword(e.target.value)}/>
             </div>
 
             <div className="form-group">
@@ -123,7 +163,7 @@ async function handleSubmit(e) {
                 required 
                 placeholder="Confirm Password"
                 value={confirmPassword}
-                onChange={(e)=>setConfirmPassword(e.target.value)}/>
+                onChange={(e)=>validateConfirmPassword(e.target.value)}/>
             </div>
             <div className='form-group'>
        

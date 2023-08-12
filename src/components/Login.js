@@ -18,6 +18,7 @@ function Login() {
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [isCodeVerified, setIsCodeVerified] = useState(false);
   const [token, setToken] = useState('');
+  const[role,setRole]=useState('');
 
   const handleCodeChange = (event) => {
     setVerificationCode(event.target.value);
@@ -35,13 +36,16 @@ function Login() {
 
     const storedCode = localStorage.getItem('verificationCode');
 
-    if (verificationCode === storedCode) {
+    if (verificationCode === storedCode && role==='User') {
       message.success('Verification code is correct');
       setIsCodeVerified(true);
       localStorage.setItem('token', token);
       localStorage.setItem('isLogged', true);
       navigate('/');
-    } else {
+      
+    }
+
+    else {
       message.error('Invalid verification code');
     }
   };
@@ -82,24 +86,31 @@ function Login() {
       if (!loginData.email || !loginData.password) {
           return message.error("Please fill all the fields");
       }
-  
-      // Check if the email and password are both "admin"
-      // If true, navigate to "/adduni" route
+    
        else {
         
-          // If the email and password are not "admin",
-          // call the "login" function from the "userServices" module
-          // and attempt to log in the user
           userService.login(loginData)
-              .then(response => {
-                  console.log(response.data);                  
+              .then(response => {   
+                if (response.data.role==='User') {             
                   setIsCodeSent(true);
                   setToken(response.data.token);
+                  setRole(response.data.role);
                   message.success('Verification code has been sent to your email address');
                   delete failedAttempts[loginData.email];
-                  localStorage.setItem('failedLoginAttempts', JSON.stringify(failedAttempts));
-                  
-              })
+                  localStorage.setItem('failedLoginAttempts', JSON.stringify(failedAttempts)); 
+                }
+                else if (response.data.role==='Admin') {
+                  setToken(response.data.token);
+                  setRole(response.data.role);
+                  message.success('Login Successful');
+                  localStorage.setItem('token', token);
+                  localStorage.setItem('isLogged', true);
+                  navigate('/admin');
+                  delete failedAttempts[loginData.email];
+                  localStorage.setItem('failedLoginAttempts', JSON.stringify(failedAttempts));   
+              }
+              }
+              )
               .catch(err => {
                   // Increment failed login attempts for the user
                   failedAttempts[loginData.email] = (failedAttempts[loginData.email] || 0) + 1;

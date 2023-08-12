@@ -41,13 +41,13 @@
   margin-bottom: 20px;
 }
 
-.form-group label {
+.form-group .label {
   display: block;
   margin-bottom: 5px;
   color: #555;
 }
 
-.form-group input {
+.form-group .input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -55,12 +55,12 @@
   transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.form-group .input:focus {
   outline: none;
   border-color: #FF0088;
 }
 
-button[type="submit"] {
+.login-container .button[type="submit"] {
   padding: 10px 20px;
   background-color: #FF0088;
   color: #fff;
@@ -70,7 +70,7 @@ button[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
+.login-container .button[type="submit"]:hover {
   background-color:#fe72bd}
 
 #link-register {
@@ -94,7 +94,7 @@ button[type="submit"]:hover {
   /* Adjust this to your desired height */
 }
 
-.verify-container form {
+.verify-container .form {
   margin-top: 10vh;
   padding: 2rem;
   display: flex;
@@ -107,8 +107,8 @@ button[type="submit"]:hover {
     height: 30vh;
 }
 
-.verify-container label,
-.verify-container input,
-.verify-container button {
+.verify-container .label,
+.verify-container .input,
+.verify-container .button {
   margin-bottom: 5vh;
 }
